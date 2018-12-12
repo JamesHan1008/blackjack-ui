@@ -7,7 +7,6 @@ import DealerManagement from "./DealerManagement";
 import Game from "./Game";
 
 require("dotenv").config();
-console.log(process.env);
 
 class App extends Component {
     render() {

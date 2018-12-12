@@ -19,6 +19,12 @@ class UpdateDealerForm extends React.Component {
         });
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            dealer: nextProps.dealer,
+        });
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
 

@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import Websocket from "react-websocket";
 
 import ListDealers from "./components/DealerManagement/ListDealers";
 import AddDealerForm from "./components/DealerManagement/AddDealerForm";
 import UpdateDealerForm from "./components/DealerManagement/UpdateDealerForm";
 import { fetchDealers, fetchDealer, addDealer, updateDealer } from "./dealer_management_api";
-
 
 class DealerManagement extends Component {
     constructor(props) {
@@ -88,9 +86,6 @@ class DealerManagement extends Component {
         this.setState({
             dealer: current_dealer
         });
-
-        const socket = this.refs.socket;
-        socket.state.ws.send(JSON.stringify(current_dealer));
     }
 
     handleChangeCheckbox(e) {
@@ -100,9 +95,6 @@ class DealerManagement extends Component {
         this.setState({
             dealer: current_dealer
         });
-
-        const socket = this.refs.socket;
-        socket.state.ws.send(JSON.stringify(current_dealer));
     }
 
     render() {
@@ -118,12 +110,13 @@ class DealerManagement extends Component {
                 }
                 {
                     this.state.is_editing ?
-                    <UpdateDealerForm handleSave={ this.handleUpdateDealer } dealer={ this.state.dealer }/>
+                    <React.Fragment>
+                        <p>Hello {this.state.dealer.id}</p>
+                        <UpdateDealerForm handleSave={ this.handleUpdateDealer } dealer={ this.state.dealer }/>
+                    </React.Fragment>
                     :
                     null
                 }
-                <Websocket ref="socket" url="ws://127.0.0.1:8000/ws/dealers/"
-                    onMessage={ this.handleData.bind(this) }/>
             </React.Fragment>
         );
     }
